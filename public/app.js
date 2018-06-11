@@ -1,6 +1,3 @@
-* Open `server.js` and complete the empty routes for accessing all articles, 
-accessing a specific article, and for saving a new article.
-
 // Grab the articles as a json
 $.getJSON("/articles", function(data) {
   // For each one
@@ -9,6 +6,7 @@ $.getJSON("/articles", function(data) {
     $("#articles").append("<p data-id='" + data[i]._id + "'>" + data[i].title + "<br />" + data[i].link + "</p>");
   }
 });
+
 
 // Whenever someone clicks a p tag
 $(document).on("click", "p", function() {
