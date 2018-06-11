@@ -4,10 +4,20 @@ var mongojs = require("mongojs");
 var request = require("request");
 var mongoose = require("mongoose");
 var express = require("express");
+var exphbs  = require('express-handlebars');
 var bodyParser = require("body-parser");
 
 mongoose.Promise = Promise;
 mongoose.connect("mongodb://localhost/mongoHeadlines");
+
+var app = express();
+ 
+app.engine('handlebars', exphbs({defaultLayout: 'main'}));
+app.set('view engine', 'handlebars');
+ 
+app.get('/', function (req, res) {
+    res.render('home');
+});
 
 // import mongoose from 'mongoose';
 // var db = mongojs(databaseUrl, collections);
@@ -78,7 +88,7 @@ app.get("/", function(req, res) {
     // Send a "Scrape Complete" message to the browser
     res.send("Scrape Complete");
   });
-    
+  
 app.listen(3000, function() {
 console.log("App running on port 3000!");
 });
