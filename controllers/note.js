@@ -1,31 +1,24 @@
-// Note model
-// ==========
+// Controller for our notes
+// ========================
+var db = require("../models");
 
-// Require mongoose
-var mongoose = require("mongoose");
-// Create the schema class using mongoose's schema method
-var Schema = mongoose.Schema;
-
-// Create the noteSchema with the schema object
-var noteSchema = new Schema({
-  // The headline is the article associate with the note
-  _headlineId: {
-    type: Schema.Types.ObjectId,
-    ref: "Headline"
+module.exports = {
+  // Find one note
+  find: function(req, res) {
+    db.Note.find({ _headlineId: req.params.id }).then(function(dbNote) {
+      res.json(dbNote);
+    });
   },
-  // date is just a string
-  date: {
-    type: Date,
-    default: Date.now
+  // Create a new note
+  create: function(req, res) {
+    db.Note.create(req.body).then(function(dbNote) {
+      res.json(dbNote);
+    });
   },
-  // as is the noteText
-  noteText: String
-});
-
-// Create the Note model using the noteSchema
-var Note = mongoose.model("Note", noteSchema);
-
-// Export the Note model
-module.exports = Note;
-
-
+  // Delete a note with a given id
+  delete: function(req, res) {
+    db.Note.remove({ _id: req.params.id }).then(function(dbNote) {
+      res.json(dbNote);
+    });
+  }
+};
