@@ -42,11 +42,4 @@ $(document).on("click", "p", function() {
     });
 });
 
-    // With that done
-    .then(function(data) {
-      // Log the response
-      console.log(data);
-      // Empty the notes section
-      $("#notes").empty();
-    });
 
